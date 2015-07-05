@@ -4,6 +4,37 @@ extern crate rusqlite;
 
 use std::path::PathBuf;
 
+/// An `r2d2::ManageConnection` for `rusqlite::SqliteConnection`s.
+///
+/// ## Example
+///
+/// ```rust
+/// extern crate r2d2;
+/// extern crate r2d2_sqlite;
+/// extern crate rusqlite;
+///
+/// use std::path::PathBuf;
+/// use std::sync::Arc;
+/// use std::default::Default;
+/// use std::thread;
+/// use r2d2_sqlite::SQLiteConnectionManager;
+/// use rusqlite::{SQLITE_OPEN_URI, SQLITE_OPEN_CREATE, SQLITE_OPEN_READ_WRITE};
+///
+/// fn main() {
+///     let config = r2d2::Config::default();
+///     let manager = SQLiteConnectionManager::new(PathBuf::from("file:dummy.db?mode=memory&cache=shared"),
+///             SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE);
+///     let pool = Arc::new(r2d2::Pool::new(config, manager).unwrap());
+///
+///     for i in 0..10i32 {
+///         let pool = pool.clone();
+///         thread::spawn(move || {
+///             let conn = pool.get().unwrap();
+///             conn.execute("PRAGMA user_version=?1", &[&i]).unwrap();
+///         });
+///     }
+/// }
+/// ```
 pub struct SQLiteConnectionManager {
     path: PathBuf,
     flags: rusqlite::SqliteOpenFlags
