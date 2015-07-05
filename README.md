@@ -1,4 +1,7 @@
 # R2D2-SQLite
+
+[![Build Status](https://travis-ci.org/gwenn/r2d2-sqlite.svg?branch=master)](https://travis-ci.org/gwenn/r2d2-sqlite)
+
 [rusqlite](https://github.com/jgallagher/rusqlite) support library for the [r2d2](https://github.com/sfackler/r2d2) connection pool.
 
 ## Example
