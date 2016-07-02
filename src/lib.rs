@@ -23,7 +23,8 @@ use std::path::PathBuf;
 ///
 /// fn main() {
 ///     let config = r2d2::Config::default();
-///     let manager = SQLiteConnectionManager::new(PathBuf::from("file:dummy.db?mode=memory&cache=shared"),
+///     let manager = SQLiteConnectionManager::new(
+///             PathBuf::from("file:dummy.db?mode=memory&cache=shared"),
 ///             SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE);
 ///     let pool = Arc::new(r2d2::Pool::new(config, manager).unwrap());
 ///
@@ -38,7 +39,7 @@ use std::path::PathBuf;
 /// ```
 pub struct SQLiteConnectionManager {
     path: PathBuf,
-    flags: rusqlite::SqliteOpenFlags
+    flags: rusqlite::OpenFlags,
 }
 
 impl SQLiteConnectionManager {
@@ -46,8 +47,7 @@ impl SQLiteConnectionManager {
     ///
     /// See `rusqlite::SqliteConnection::open_with_flags` for a description of
     /// the parameter types.
-    pub fn new(path: PathBuf, flags: rusqlite::SqliteOpenFlags)
-            -> SQLiteConnectionManager {
+    pub fn new(path: PathBuf, flags: rusqlite::OpenFlags) -> SQLiteConnectionManager {
         SQLiteConnectionManager {
             path: path,
             flags: flags,
@@ -56,26 +56,21 @@ impl SQLiteConnectionManager {
 }
 
 impl r2d2::ManageConnection for SQLiteConnectionManager {
-    type Connection = rusqlite::SqliteConnection;
-    type Error = rusqlite::SqliteError;
+    type Connection = rusqlite::Connection;
+    type Error = rusqlite::Error;
 
-    fn connect(&self) -> Result<rusqlite::SqliteConnection, rusqlite::SqliteError> {
+    fn connect(&self) -> Result<rusqlite::Connection, rusqlite::Error> {
         rusqlite::SqliteConnection::open_with_flags(&self.path, self.flags)
     }
 
-    fn is_valid(&self, conn: &mut rusqlite::SqliteConnection) -> Result<(), rusqlite::SqliteError> {
+    fn is_valid(&self, conn: &mut rusqlite::Connection) -> Result<(), rusqlite::Error> {
         // http://sqlite.org/pragma.html#pragma_schema_version
         conn.execute_batch("PRAGMA schema_verion")
     }
 
-    fn has_broken(&self, conn: &mut rusqlite::SqliteConnection) -> bool {
-        if !conn.is_autocommit() { // pending transaction
-            true
-        } else if conn.is_busy() { // at least one statement busy
-            true
-        } else {
-            false
-        }
+    fn has_broken(&self, conn: &mut rusqlite::Connection) -> bool {
+        // pending transaction or at least one statement busy
+        !conn.is_autocommit() || conn.is_busy()
     }
 }
 

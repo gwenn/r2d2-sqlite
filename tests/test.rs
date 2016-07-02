@@ -3,7 +3,6 @@ extern crate r2d2;
 extern crate r2d2_sqlite;
 
 use std::path::PathBuf;
-use std::sync::Arc;
 use std::sync::mpsc;
 use std::thread;
 
@@ -15,7 +14,7 @@ fn test_basic() {
     let manager = SQLiteConnectionManager::new(PathBuf::from("file:dummy.db?mode=memory&cache=shared"),
             SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE);
     let config = r2d2::Config::builder().pool_size(2).build();
-    let pool = Arc::new(r2d2::Pool::new(config, manager).unwrap());
+    let pool = r2d2::Pool::new(config, manager).unwrap();
 
     let (s1, r1) = mpsc::channel();
     let (s2, r2) = mpsc::channel();
