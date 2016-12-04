@@ -60,7 +60,7 @@ impl r2d2::ManageConnection for SQLiteConnectionManager {
     type Error = rusqlite::Error;
 
     fn connect(&self) -> Result<rusqlite::Connection, rusqlite::Error> {
-        rusqlite::SqliteConnection::open_with_flags(&self.path, self.flags)
+        rusqlite::Connection::open_with_flags(&self.path, self.flags)
     }
 
     fn is_valid(&self, conn: &mut rusqlite::Connection) -> Result<(), rusqlite::Error> {
