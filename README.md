@@ -11,7 +11,6 @@ extern crate r2d2;
 extern crate r2d2_sqlite;
 extern crate rusqlite;
 
-use std::path::PathBuf;
 use std::sync::Arc;
 use std::thread;
 use std::default::Default;
@@ -19,7 +18,7 @@ use r2d2_sqlite::SQLiteConnectionManager;
 
 fn main() {
     let config = r2d2::Config::default();
-    let manager = SQLiteConnectionManager::new(PathBuf::from("sample.db"),
+    let manager = SQLiteConnectionManager::new("sample.db",
                                                rusqlite::SQLITE_OPEN_READ_WRITE);
     let pool = Arc::new(r2d2::Pool::new(config, manager).unwrap());
 

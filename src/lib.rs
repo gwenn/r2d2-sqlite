@@ -3,6 +3,7 @@
 extern crate r2d2;
 extern crate rusqlite;
 
+use std::convert::Into;
 use std::path::PathBuf;
 
 /// An `r2d2::ManageConnection` for `rusqlite::SqliteConnection`s.
@@ -14,7 +15,6 @@ use std::path::PathBuf;
 /// extern crate r2d2_sqlite;
 /// extern crate rusqlite;
 ///
-/// use std::path::PathBuf;
 /// use std::sync::Arc;
 /// use std::default::Default;
 /// use std::thread;
@@ -24,7 +24,7 @@ use std::path::PathBuf;
 /// fn main() {
 ///     let config = r2d2::Config::default();
 ///     let manager = SQLiteConnectionManager::new(
-///             PathBuf::from("file:dummy.db?mode=memory&cache=shared"),
+///             "file:dummy.db?mode=memory&cache=shared",
 ///             SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE);
 ///     let pool = Arc::new(r2d2::Pool::new(config, manager).unwrap());
 ///
@@ -47,9 +47,11 @@ impl SQLiteConnectionManager {
     ///
     /// See `rusqlite::SqliteConnection::open_with_flags` for a description of
     /// the parameter types.
-    pub fn new(path: PathBuf, flags: rusqlite::OpenFlags) -> SQLiteConnectionManager {
+    pub fn new<T>(path: T, flags: rusqlite::OpenFlags) -> SQLiteConnectionManager
+        where T: Into<PathBuf>
+    {
         SQLiteConnectionManager {
-            path: path,
+            path: path.into(),
             flags: flags,
         }
     }
