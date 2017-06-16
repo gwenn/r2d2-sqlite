@@ -48,7 +48,8 @@ impl SQLiteConnectionManager {
     /// See `rusqlite::SqliteConnection::open_with_flags` for a description of
     /// the parameter types.
     pub fn new<T>(path: T, flags: rusqlite::OpenFlags) -> SQLiteConnectionManager
-        where T: Into<PathBuf>
+    where
+        T: Into<PathBuf>,
     {
         SQLiteConnectionManager {
             path: path.into(),

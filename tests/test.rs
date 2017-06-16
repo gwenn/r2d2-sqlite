@@ -10,8 +10,10 @@ use rusqlite::{SQLITE_OPEN_URI, SQLITE_OPEN_CREATE, SQLITE_OPEN_READ_WRITE};
 
 #[test]
 fn test_basic() {
-    let manager = SQLiteConnectionManager::new("file:dummy.db?mode=memory&cache=shared",
-            SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE);
+    let manager = SQLiteConnectionManager::new(
+        "file:dummy.db?mode=memory&cache=shared",
+        SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE,
+    );
     let config = r2d2::Config::builder().pool_size(2).build();
     let pool = r2d2::Pool::new(config, manager).unwrap();
 
@@ -42,9 +44,14 @@ fn test_basic() {
 
 #[test]
 fn test_is_valid() {
-    let manager = SQLiteConnectionManager::new("file:dummy.db?mode=memory&cache=shared",
-            SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE);
-    let config = r2d2::Config::builder().pool_size(1).test_on_check_out(true).build();
+    let manager = SQLiteConnectionManager::new(
+        "file:dummy.db?mode=memory&cache=shared",
+        SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE,
+    );
+    let config = r2d2::Config::builder()
+        .pool_size(1)
+        .test_on_check_out(true)
+        .build();
     let pool = r2d2::Pool::new(config, manager).unwrap();
 
     pool.get().unwrap();
