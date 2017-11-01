@@ -1,12 +1,12 @@
-extern crate rusqlite;
 extern crate r2d2;
 extern crate r2d2_sqlite;
+extern crate rusqlite;
 
 use std::sync::mpsc;
 use std::thread;
 
 use r2d2_sqlite::SQLiteConnectionManager;
-use rusqlite::{SQLITE_OPEN_URI, SQLITE_OPEN_CREATE, SQLITE_OPEN_READ_WRITE};
+use rusqlite::{SQLITE_OPEN_CREATE, SQLITE_OPEN_READ_WRITE, SQLITE_OPEN_URI};
 
 #[test]
 fn test_basic() {
