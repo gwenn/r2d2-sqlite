@@ -14,10 +14,7 @@ fn test_basic() {
         "file:dummy.db?mode=memory&cache=shared",
         SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE,
     );
-    let pool = r2d2::Pool::builder()
-        .max_size(2)
-        .build(manager)
-        .unwrap();
+    let pool = r2d2::Pool::builder().max_size(2).build(manager).unwrap();
 
     let (s1, r1) = mpsc::channel();
     let (s2, r2) = mpsc::channel();
