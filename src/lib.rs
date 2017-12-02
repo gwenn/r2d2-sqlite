@@ -22,11 +22,10 @@ use std::path::PathBuf;
 /// use rusqlite::{SQLITE_OPEN_URI, SQLITE_OPEN_CREATE, SQLITE_OPEN_READ_WRITE};
 ///
 /// fn main() {
-///     let config = r2d2::Config::default();
 ///     let manager = SQLiteConnectionManager::new(
 ///             "file:dummy.db?mode=memory&cache=shared",
 ///             SQLITE_OPEN_URI | SQLITE_OPEN_CREATE | SQLITE_OPEN_READ_WRITE);
-///     let pool = Arc::new(r2d2::Pool::new(config, manager).unwrap());
+///     let pool = Arc::new(r2d2::Pool::new(manager).unwrap());
 ///
 ///     for i in 0..10i32 {
 ///         let pool = pool.clone();

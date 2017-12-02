@@ -7,7 +7,7 @@ repository = "https://github.com/gwenn/r2d2-sqlite"
 keywords = ["sqlite", "sql", "pool", "database"]
 
 [dependencies]
-r2d2 = "0.7.0"
+r2d2 = "0.8.0"
 
 [dependencies.rusqlite]
 git = "https://github.com/gwenn/rusqlite.git"
