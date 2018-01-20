@@ -18,7 +18,7 @@ use r2d2_sqlite::SQLiteConnectionManager;
 
 fn main() {
     let manager = SQLiteConnectionManager::new("sample.db",
-                                               rusqlite::SQLITE_OPEN_READ_WRITE);
+                                               rusqlite::OpenFlags::SQLITE_OPEN_READ_WRITE);
     let pool = Arc::new(r2d2::Pool::new(manager).unwrap());
 
     for i in 0..10i32 {
