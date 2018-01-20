@@ -12,7 +12,8 @@ use rusqlite::OpenFlags;
 fn test_basic() {
     let manager = SQLiteConnectionManager::new(
         "file:dummy.db?mode=memory&cache=shared",
-        OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_CREATE | OpenFlags::SQLITE_OPEN_READ_WRITE,
+        OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_CREATE
+            | OpenFlags::SQLITE_OPEN_READ_WRITE,
     );
     let pool = r2d2::Pool::builder().max_size(2).build(manager).unwrap();
 
@@ -45,7 +46,8 @@ fn test_basic() {
 fn test_is_valid() {
     let manager = SQLiteConnectionManager::new(
         "file:dummy.db?mode=memory&cache=shared",
-        OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_CREATE | OpenFlags::SQLITE_OPEN_READ_WRITE,
+        OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_CREATE
+            | OpenFlags::SQLITE_OPEN_READ_WRITE,
     );
     let pool = r2d2::Pool::builder()
         .max_size(1)
