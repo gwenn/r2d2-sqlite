@@ -52,7 +52,7 @@ impl SQLiteConnectionManager {
     {
         SQLiteConnectionManager {
             path: path.into(),
-            flags: flags,
+            flags,
         }
     }
 }
