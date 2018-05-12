@@ -10,7 +10,7 @@ keywords = ["sqlite", "sql", "pool", "database"]
 r2d2 = "0.8.0"
 
 [dependencies.rusqlite]
-git = "https://github.com/gwenn/rusqlite.git"
-branch = "r2d2"
+git = "https://github.com/jgallagher/rusqlite.git"
+branch = "master"
 default-features = false
 features = ["bundled"]
