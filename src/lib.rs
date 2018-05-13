@@ -67,7 +67,7 @@ impl r2d2::ManageConnection for SQLiteConnectionManager {
 
     fn is_valid(&self, conn: &mut rusqlite::Connection) -> Result<(), rusqlite::Error> {
         // http://sqlite.org/pragma.html#pragma_schema_version
-        conn.execute_batch("PRAGMA schema_verion")
+        conn.execute_batch("PRAGMA schema_version")
     }
 
     fn has_broken(&self, conn: &mut rusqlite::Connection) -> bool {
