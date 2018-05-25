@@ -4,6 +4,8 @@
 
 [rusqlite](https://github.com/jgallagher/rusqlite) support library for the [r2d2](https://github.com/sfackler/r2d2) connection pool.
 
+**BEWARE:** _Not_ related to [r2d2_sqlite](https://crates.io/crates/r2d2_sqlite) nor [r2d2-sqlite3](https://crates.io/crates/r2d2-sqlite3) crates ([Jul 5, 2015](551d1f71) vs [Jul 22, 2015](https://github.com/ivanceras/r2d2-sqlite/commit/8ea9f422493bb2fb7b4eea71e6a82a35d2dfca9c)).
+
 ## Example
 
 ```rust
