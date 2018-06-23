@@ -6,6 +6,10 @@ description = "SQLite support for the r2d2 connection pool"
 repository = "https://github.com/gwenn/r2d2-sqlite"
 keywords = ["sqlite", "sql", "pool", "database"]
 
+[badges]
+travis-ci = { repository = "gwenn/r2d2-sqlite" }
+maintenance = { status = "experimental" }
+
 [dependencies]
 r2d2 = "0.8.0"
 
