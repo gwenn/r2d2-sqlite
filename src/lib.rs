@@ -15,16 +15,19 @@ use std::path::PathBuf;
 /// extern crate r2d2_sqlite;
 /// extern crate rusqlite;
 ///
-/// use std::sync::Arc;
-/// use std::default::Default;
-/// use std::thread;
 /// use r2d2_sqlite::SQLiteConnectionManager;
 /// use rusqlite::OpenFlags;
+/// use std::default::Default;
+/// use std::sync::Arc;
+/// use std::thread;
 ///
 /// fn main() {
 ///     let manager = SQLiteConnectionManager::new(
-///             "file:dummy.db?mode=memory&cache=shared",
-///             OpenFlags::SQLITE_OPEN_URI | OpenFlags::SQLITE_OPEN_CREATE | OpenFlags::SQLITE_OPEN_READ_WRITE);
+///         "file:dummy.db?mode=memory&cache=shared",
+///         OpenFlags::SQLITE_OPEN_URI
+///             | OpenFlags::SQLITE_OPEN_CREATE
+///             | OpenFlags::SQLITE_OPEN_READ_WRITE,
+///     );
 ///     let pool = Arc::new(r2d2::Pool::new(manager).unwrap());
 ///
 ///     for i in 0..10i32 {
