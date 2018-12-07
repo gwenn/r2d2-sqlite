@@ -9,19 +9,18 @@
 ## Example
 
 ```rust
-extern crate r2d2;
-extern crate r2d2_sqlite;
-extern crate rusqlite;
 
 use std::sync::Arc;
 use std::thread;
 use std::default::Default;
+use r2d2::Pool;
 use r2d2_sqlite::SQLiteConnectionManager;
+use rusqlite::OpenFlags;
 
 fn main() {
     let manager = SQLiteConnectionManager::new("sample.db",
-                                               rusqlite::OpenFlags::SQLITE_OPEN_READ_WRITE);
-    let pool = Arc::new(r2d2::Pool::new(manager).unwrap());
+                                               OpenFlags::SQLITE_OPEN_READ_WRITE);
+    let pool = Arc::new(Pool::new(manager).unwrap());
 
     for i in 0..10i32 {
         let pool = pool.clone();

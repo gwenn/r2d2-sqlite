@@ -1,10 +1,7 @@
-extern crate r2d2;
-extern crate r2d2_sqlite;
-extern crate rusqlite;
-
 use std::sync::mpsc;
 use std::thread;
 
+use r2d2::Pool;
 use r2d2_sqlite::SQLiteConnectionManager;
 use rusqlite::OpenFlags;
 
@@ -16,7 +13,7 @@ fn test_basic() {
             | OpenFlags::SQLITE_OPEN_CREATE
             | OpenFlags::SQLITE_OPEN_READ_WRITE,
     );
-    let pool = r2d2::Pool::builder().max_size(2).build(manager).unwrap();
+    let pool = Pool::builder().max_size(2).build(manager).unwrap();
 
     let (s1, r1) = mpsc::channel();
     let (s2, r2) = mpsc::channel();
@@ -51,7 +48,7 @@ fn test_is_valid() {
             | OpenFlags::SQLITE_OPEN_CREATE
             | OpenFlags::SQLITE_OPEN_READ_WRITE,
     );
-    let pool = r2d2::Pool::builder()
+    let pool = Pool::builder()
         .max_size(1)
         .test_on_check_out(true)
         .build(manager)

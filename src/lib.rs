@@ -1,7 +1,5 @@
 //! SQLite support for the `r2d2` connection pool.
 #![warn(missing_docs)]
-extern crate r2d2;
-extern crate rusqlite;
 
 use std::convert::Into;
 use std::path::PathBuf;
@@ -11,10 +9,6 @@ use std::path::PathBuf;
 /// ## Example
 ///
 /// ```rust
-/// extern crate r2d2;
-/// extern crate r2d2_sqlite;
-/// extern crate rusqlite;
-///
 /// use r2d2_sqlite::SQLiteConnectionManager;
 /// use rusqlite::OpenFlags;
 /// use std::default::Default;
