@@ -13,4 +13,4 @@ maintenance = { status = "experimental" }
 
 [dependencies]
 r2d2 = "0.8.0"
-rusqlite = { version = "0.18", default-features = false, features = ["bundled"] }
+rusqlite = { version = "0.19", default-features = false, features = ["bundled"] }
