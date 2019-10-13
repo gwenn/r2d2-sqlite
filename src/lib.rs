@@ -15,7 +15,6 @@ use std::path::PathBuf;
 /// use std::sync::Arc;
 /// use std::thread;
 ///
-/// fn main() {
 ///     let manager = SQLiteConnectionManager::new(
 ///         "file:dummy.db?mode=memory&cache=shared",
 ///         OpenFlags::SQLITE_OPEN_URI
@@ -31,7 +30,6 @@ use std::path::PathBuf;
 ///             conn.execute("PRAGMA user_version=?1", &[&i]).unwrap();
 ///         });
 ///     }
-/// }
 /// ```
 pub struct SQLiteConnectionManager {
     path: PathBuf,
