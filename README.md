@@ -1,6 +1,6 @@
 # R2D2-SQLite
 
-[![Build Status](https://travis-ci.org/gwenn/r2d2-sqlite.svg?branch=master)](https://travis-ci.org/gwenn/r2d2-sqlite)
+[![Build Status](https://github.com/gwenn/r2d2-sqlite/workflows/Go/badge.svg)](https://github.com/gwenn/r2d2-sqlite/actions)
 [![dependency status](https://deps.rs/repo/github/gwenn/r2d2-sqlite/status.svg)](https://deps.rs/repo/github/gwenn/r2d2-sqlite)
 
 [rusqlite](https://github.com/jgallagher/rusqlite) support library for the [r2d2](https://github.com/sfackler/r2d2) connection pool.

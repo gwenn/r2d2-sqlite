@@ -1,4 +1,0 @@
-sudo: false
-language: rust
-script:
-- cargo test
