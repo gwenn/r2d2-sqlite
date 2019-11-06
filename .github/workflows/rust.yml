@@ -11,8 +11,6 @@ jobs:
       - name: Install libsqlite3-dev
         run: sudo apt-get install libsqlite3-dev
       - uses: actions/checkout@v1
-      - name: Build Lemon
-        run: make
       - name: Build
         run: cargo build --verbose
       - name: Run tests
