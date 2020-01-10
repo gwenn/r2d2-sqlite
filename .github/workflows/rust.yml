@@ -1,6 +1,6 @@
-name: Rust
+name: CI
 
-on: [push]
+oon: [push, pull_request]
 
 jobs:
   build:
