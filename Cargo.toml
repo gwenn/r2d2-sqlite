@@ -8,7 +8,6 @@ repository = "https://github.com/gwenn/r2d2-sqlite"
 keywords = ["sqlite", "sql", "pool", "database"]
 
 [badges]
-travis-ci = { repository = "gwenn/r2d2-sqlite" }
 maintenance = { status = "experimental" }
 
 [dependencies]
