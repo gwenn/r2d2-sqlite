@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Install libsqlite3-dev
         run: sudo apt-get install libsqlite3-dev
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Build
         run: cargo build
       - name: Run tests
