@@ -31,6 +31,7 @@ use std::path::PathBuf;
 ///         });
 ///     }
 /// ```
+#[derive(Debug)]
 pub struct SQLiteConnectionManager {
     path: PathBuf,
     flags: rusqlite::OpenFlags,
